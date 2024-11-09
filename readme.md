@@ -3,7 +3,7 @@
 ## **一、"gen.h"** 
 #### 1. `名称`："gen.h" 即 "generator.h"
 #### 2. `功能`：生成随机测试用例（Generating Random Test Cases）
-#### 3. `用法`：将以下代码放入 `main.cpp`
+#### 3. `用法`：将以下静态执行的代码放入 `main.cpp`
 ```cpp
 #ifdef LOCAL_DBG  
 #include "dbg/gen.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/gen.h
@@ -34,7 +34,7 @@ struct GEN {
 ## 二、"che.h"
 #### 1. `名称`："che.h" 即 "checker.h"
 #### 2. `功能`：检查当前解法和暴力解法输出是否一致（Check Solution Correctness）
-#### 3. `用法`：将以下代码放入 `main.cpp`
+#### 3. `用法`：将以下静态执行的放入 `main.cpp`
 ```cpp
 #ifdef LOCAL_DBG
 #include "dbg/che.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/che.h 
@@ -63,5 +63,71 @@ struct CHE {
     assert(che::isContentConsistent("../outputA.txt", "../outputB.txt"));
   }
 } CHE;
+#endif
+```
+
+#### 3.2 Example: https://atcoder.jp/contests/abc379/submissions/59613160
+#### gen.h che.h组合用法
+```cpp
+#ifdef LOCAL_DBG
+#include "dbg/che.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/che.h
+#include "dbg/gen.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/gen.h
+struct DBG {
+  DBG() {
+    while (true) {
+      vector<int64_t> a = gen::Ints(1, 10)(5);
+      int sum = 0;
+      for (int x : a) sum += x;
+      if (sum != 10) continue;
+      gen::testcases("../input.txt", 1, [&] (ofstream& file) {
+        file << 10 << ' ' << 5 << '\n';
+        file << gen::Ints(1, 10)(5, 2) << '\n';
+        file << a << '\n';
+      });
+      
+      che::program("../input.txt", "../outputA.txt", solve).run();
+      che::program("../input.txt", "../outputB.txt", [&] () {
+        int n, m;
+        cin >> n >> m;
+        vector<int> pos(m), cnt(m);
+        vector<int> X(n);
+        for (int i = 0; i < m; i++) {
+          cin >> pos[i];
+          --pos[i];
+        }
+        for (int i = 0; i < m; i++) {
+          cin >> cnt[i];
+        }
+        for (int i = 0; i < m; i++) {
+          X[pos[i]] = cnt[i];
+        }
+        int64_t count = 0;
+        for (int i = 0; i < n; i++) {
+          if (X[i] == 0) {
+            for (int j = i-1; j >= 0; j--) {
+              if (X[j] > 1) {
+                X[j]--;
+                count += i-j;
+                X[i]++;
+              }
+            }
+            if (X[i] == 0) {
+              cout << -1 << '\n';
+              return;
+            }
+          }
+        }
+        for (int i = 0; i < n; i++) {
+          if (X[i] != 1) {
+            cout << -1 << '\n';
+            return;
+          }
+        }
+        cout << count << '\n';
+      }).run();
+      assert(che::isContentConsistent("../outputA.txt", "../outputB.txt"));
+    }
+  }
+} DBG;
 #endif
 ```
