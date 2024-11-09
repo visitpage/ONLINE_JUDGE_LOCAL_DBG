@@ -50,7 +50,7 @@ namespace gen {
               st.insert(num);
             }
             if (st.size() < size) {
-              cerr << "gen[fatal-error]: hi-lo+1 < n" << endl;
+              cerr << "gen[fatal-error]: \"hi-lo+1 < n\"" << endl;
               assert(false);
             }
           }
