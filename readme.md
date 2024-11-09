@@ -1,4 +1,4 @@
-## 本仓库头文件的`名字`和`功能`和`用法`说明：
+## 本仓库头文件的`名字`，`功能`和`用法`说明：
 ## **"gen.h"** （generator.h）
 #### 1. description：RandomTestcaseGenerating （随机测试用例生成）
 #### 2. how to use: put under code inside main.cpp （Example #1）
