@@ -40,8 +40,10 @@ struct CHE {
 #### 使用时在两个中的一个 che::program() 的第三个参数中实现暴力解法的工作逻辑。
 
 ---
-## Examples: 
-# 实战，DEBUG，LET'S START。
+## Examples:
+- 更高
+- 更快
+- 更强
 ###  Problem #1: [E - Sum of All Substrings](https://atcoder.jp/contests/abc379/submissions/59613160) (Atcoder_abc379)
 ```cpp
 #ifdef LOCAL_DBG
@@ -109,6 +111,7 @@ struct DBG {
 } DBG;
 #endif
 ```
+memo: 这个用while(true)来DEBUG的方式是我在这场比赛赛时中首次造出来的框架，之后，对于能写暴力程序的题目，我会很经常用这个框架。
 
 ### Problem #2: (cf.) [E. XOR and Favorite Number](https://codeforces.com/problemset/problem/617/E) (Codeforces_round_340_div2)
 ```cpp
@@ -153,6 +156,6 @@ struct DBG {
 } DBG;
 #endif
 ```
-note：`MO's  algortithm`的**add**和**remove** lambda都分别写会比较好，我第一次只写了一个add(±1)想一个顶俩，会因为add和remove计数答案和维护数据结构的代码执行顺序不同导致出错了。
+memo：我发现`MO's  algortithm`的**add**和**remove** lambda都分别写会比较好，我第一次写这题时只写了一个add(±1)想一个顶俩，就因为add和remove计数答案和维护数据结构的代码执行顺序需要反转出错了。
 
 #### Problem #3: 
