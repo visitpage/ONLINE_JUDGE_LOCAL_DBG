@@ -35,7 +35,7 @@ struct CHE {
     }
 } CHE;
 ```
-使用前先在任一 che::program() 的第三个参数中实现暴力解法。
+使用时需要在其中一个 che::program() 的第三个参数指定你的当前解法solve，另一个che::program则需要指定一个实现的暴力解法。
 
 ---
 ### 三、Examples:
