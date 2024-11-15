@@ -115,7 +115,7 @@ namespace gen {
   }
 }
 
-// description: 顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果希望更方便地输出 vector，可以像以下方式考虑重载 ostream 的 << 运算符。
+// description: 顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果你希望更方便地输出 vector，可以像以下方式重载 ostream 的 << 运算符。
 //template<class T> ostream& operator<<(ostream& os, const vector<T>& a) {
 //  for (const T& x : a) {
 //    os << x << ' ';
