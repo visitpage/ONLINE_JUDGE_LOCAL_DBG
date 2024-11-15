@@ -46,7 +46,7 @@ namespace gen {
           generate(result.begin(), result.end(), [&] () { return ud(gen); });
           break;
         }
-        case 1: case 5: // 1. 随机但是非递减NonDecreasingRandom | 5. 随机但是非递增NonIncreasingRandom
+        case 1: case 5: // 1. 随机但是非递减的数组NonDecreasingRandom | 5. 随机但是非递增的数组NonIncreasingRandom
         {
           generate(result.begin(), result.end(), [&] () { return ud(gen); });
           sort(result.begin(), result.end());
@@ -172,7 +172,7 @@ namespace gen {
   }
 }
 
-// description: 顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果你希望更方便地输出 vector，可以像以下方式重载 ostream 的 << 运算符。
+// description: 重载顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果你希望更方便地输出 vector，可以像以下方式重载 ostream 的 << 运算符。
 //template<class T> ostream& operator<<(ostream& os, const vector<T>& a) {
 //  for (const T& x : a) {
 //    os << x << ' ';
