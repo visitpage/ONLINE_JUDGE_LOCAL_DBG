@@ -19,7 +19,7 @@ namespace gen {
   // 函数的声明（实现在后面）
   void gen_warn(const string&);
   void gen_assert(bool, const string&);
-  template<class T> vector<int> split(T n);
+  template<class T> vector<int> split(T, double allocationLimit = 0.8);
 
   // 随机数生成器
   mt19937_64 gen(chrono::steady_clock::now().time_since_epoch().count());
@@ -91,15 +91,17 @@ namespace gen {
         case 6: case 7: // 6. 结点下标从零开始的随机树 RandomTreeParent0 | 7. 结点下标从一开始的随机树 RandomTreeParent1
                         // 用长度为 n 的 parent 数组来表示表示随机树，生成时 parent[0] == -1，即第一个节点将成为根节点。
         {
-          vector<int> branchesLen = split(size);
-          for (int i = 0, spent = 0; i < (int)branchesLen.size(); i++, spent += branchesLen[i]) {
+          vector<int> branchesLen = split(size, 0.4);
+          for (int i = 0, spent = 0; i < (int)branchesLen.size(); spent += branchesLen[i++]) {
             result[spent] = (i == 0 ? -1 : Int(0, spent-1)()+(pattern == 7 ? 1 : 0));
             iota(result.begin()+spent+1, result.begin()+spent+branchesLen[i], spent+(pattern == 7 ? 1 : 0));
           }
+          break;
         }
         default:
         {
           gen_assert(false, "Using an undefined pattern (pattern = " + to_string(pattern) + ").");
+          break;
         }
       }
       return result;
@@ -135,28 +137,19 @@ namespace gen {
     }
   }
 
-  // description: 将整数 `n` 逐步分成若干份，每份最多为当前剩余数值的 80%（向上取整），同时，让结果最多允许一个一，将多余一的合并。
-  template<class T> vector<int> split(T n) {
+  // 描述：将整数 n 逐步分成若干份，每份最多为当前剩余值的allocationLimit倍（向上取整）。allocationLimit的取值范围在 (0.0, 1.0]，默认值为 0.8。该参数值越低，分出的每一份越小且更均匀。
+  template<class T> vector<int> split(T n, double allocationLimit) {
     int remaining = static_cast<int>(n);
     vector<int> result;
-    int countOfOnes = 0;
     while (remaining > 0) {
-      int piece = (int)gen::Int(1, (remaining*4+4)/5)();
-      if (piece == 1) {
-        if (countOfOnes++ == 0) {
-          result.push_back(1);
-        }
-      } else {
-        result.push_back(piece);
-      }
+      int piece = (int)gen::Int(1, (int)ceil(remaining * allocationLimit))();
+      result.push_back(piece);
       remaining -= piece;
-    }
-    if (countOfOnes > 1) {
-      result.push_back(countOfOnes-1);
     }
     sort(result.begin(), result.end());
     return result;
   }
+
 
   // description: 将一个用例格式写N次到指定文件中，通常是只写一次。
   template<class F> void testcases(const string& filename, int N, F f) {
