@@ -93,26 +93,29 @@ namespace gen {
   }
   // description: 将总数 `n` 分配为若干份，每份最多为当前剩余数值的 80%（向上取整）。让最终结果中最多只允许出现一个 1。
   template<class T> vector<int> split(T n) {
+    int remaining = static_cast<int>(n);
     vector<int> result;
-    int count1 = 0;
-    for (int piece; n > 0; ) {
-      piece = (int)gen::Int(1, (n*4+4)/5)();
+    int countOfOnes = 0;
+    while (remaining > 0) {
+      int piece = (int)gen::Int(1, (remaining*4+4)/5)();
       if (piece == 1) {
-        if (count1++ == 0) {
+        if (countOfOnes++ == 0) {
           result.push_back(1);
         }
       } else {
         result.push_back(piece);
       }
-      n -= piece;
+      remaining -= piece;
     }
-    if (count1 > 1) result.push_back(count1-1);
+    if (countOfOnes > 1) {
+      result.push_back(countOfOnes-1);
+    }
     sort(result.begin(), result.end());
     return result;
   }
 }
 
-// description: 想要更方便地输出 vector 时，考虑启用以下ostream的<<运算符重载。
+// description: 顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果希望更方便地输出 vector，可以像以下方式考虑重载 ostream 的 << 运算符。
 //template<class T> ostream& operator<<(ostream& os, const vector<T>& a) {
 //  for (const T& x : a) {
 //    os << x << ' ';
