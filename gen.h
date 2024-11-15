@@ -163,7 +163,8 @@ namespace gen {
 
   /**
    * 描述：
-   * 将整数 n 逐步分成若干份，每份大小受限于当前剩余值的 allocationLimit 倍（向上取整）。
+   * 将整数 n 逐步分成若干份。
+   * 每份大小受限于当前剩余值的 allocationLimit 倍（向上取整）。
    * allocationLimit 范围为 (0.0, 1.0]，默认值为 0.8，值越低每份越小且均匀。
    */
   template<class T> vector<int> split(T n, double allocationLimit) {
