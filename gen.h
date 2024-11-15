@@ -95,8 +95,8 @@ namespace gen {
   template<class T> vector<int> split(T n) {
     vector<int> result;
     int count1 = 0;
-    for (T piece; n > 0; ) {
-      piece = gen::Int(1, (n*4+4)/5)();
+    for (int piece; n > 0; ) {
+      piece = (int)gen::Int(1, (n*4+4)/5)();
       if (piece == 1) {
         if (count1++ == 0) {
           result.push_back(1);
@@ -111,6 +111,14 @@ namespace gen {
     return result;
   }
 }
+
+// description: 当需要更方便地输出 vector 时，可以考虑启用以下的 << 运算符重载。
+//template<class T> ostream& operator<<(ostream& os, const vector<T>& a) {
+//  for (const T& x : a) {
+//    os << x << ' ';
+//  }
+//  return os;
+//}
 
 #endif //SOLUTION_GEN_H
 
