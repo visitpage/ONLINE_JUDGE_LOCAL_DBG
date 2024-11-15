@@ -14,7 +14,6 @@
 #include <cassert>
 
 using namespace std;
-
 namespace gen {
   // 函数的声明（实现在后面）
   void gen_warn(const string&);
@@ -25,21 +24,20 @@ namespace gen {
   mt19937_64 gen(chrono::steady_clock::now().time_since_epoch().count());
 
   // 随机整数
-  struct Int {
-    uniform_int_distribution<int64_t> ud;
-    int64_t operator()() { return ud(gen); }
-    int32_t operator()(int32_t& var) { return var = (int32_t)ud(gen); }
-    int64_t operator()(int64_t& var) { return var = ud(gen); }
-    Int(int64_t lo, int64_t hi): ud(lo, hi) {
+  template<class intX_t> struct Int {
+    uniform_int_distribution<intX_t> ud;
+    intX_t operator()() { return ud(gen); }
+    intX_t operator()(intX_t& var) { return var = ud(gen); }
+    Int(intX_t lo, intX_t hi): ud(lo, hi) {
       gen_assert(lo <= hi, "Using (lo, hi) = (" + to_string(lo) + ", " + to_string(hi) + "), where lo is greater than hi for constructing uniform_int_distribution.");
     }
   };
 
   // 随机数组
-  struct Ints {
-    uniform_int_distribution<int64_t> ud;
-    vector<int64_t> operator()(int size, int pattern = 0) {
-      vector<int64_t> result(size);
+  template<class intX_t> struct Ints {
+    uniform_int_distribution<intX_t> ud;
+    vector<intX_t> operator()(int size, int pattern = 0) {
+      vector<intX_t> result(size);
       switch (pattern) {
         case 0: // 0. 简单随机的数组SimpleRandom
         {
@@ -91,7 +89,8 @@ namespace gen {
         case 6: case 7: // 6. 结点下标从零开始的随机树 RandomTreeParent0 | 7. 结点下标从一开始的随机树 RandomTreeParent1
                         // 用长度为 n 的 parent 数组来表示表示随机树，生成时 parent[0] == -1，即第一个节点将成为根节点。
         {
-          vector<int> branchesLen = split(size, 0.4);
+          vector<int> branchesLen = split(size, log(size)/size);
+          reverse(branchesLen.begin(), branchesLen.end());
           for (int i = 0, spent = 0; i < (int)branchesLen.size(); spent += branchesLen[i++]) {
             result[spent] = (i == 0 ? -1 : Int(0, spent-1)()+(pattern == 7 ? 1 : 0));
             iota(result.begin()+spent+1, result.begin()+spent+branchesLen[i], spent+(pattern == 7 ? 1 : 0));
@@ -106,20 +105,9 @@ namespace gen {
       }
       return result;
     }
-    explicit Ints(int64_t lo = -1, int64_t hi = -1): ud(lo, hi) {
+    explicit Ints(intX_t lo, intX_t hi): ud(lo, hi) {
       gen_assert(lo <= hi, "Using (lo, hi) = (" + to_string(lo) + ", " + to_string(hi) + "), where lo is greater than hi for constructing uniform_int_distribution.");
     }
-  };
-
-  // 字符串包装类
-  struct Str {
-    char offset;
-    string operator() (const vector<int64_t>& numbers) const {
-      string result(numbers.size(), '?');
-      std::transform(numbers.begin(), numbers.end(), result.begin(), [&](int64_t num) { return offset + num; });
-      return result;
-    }
-    explicit Str(char offset): offset(offset) {}
   };
 
   // 函数的实现
@@ -137,20 +125,6 @@ namespace gen {
     }
   }
 
-  // 描述：将整数 n 逐步分成若干份，每份最多为当前剩余值的allocationLimit倍（向上取整）。allocationLimit的取值范围在 (0.0, 1.0]，默认值为 0.8。该参数值越低，分出的每一份越小且更均匀。
-  template<class T> vector<int> split(T n, double allocationLimit) {
-    int remaining = static_cast<int>(n);
-    vector<int> result;
-    while (remaining > 0) {
-      int piece = (int)gen::Int(1, (int)ceil(remaining * allocationLimit))();
-      result.push_back(piece);
-      remaining -= piece;
-    }
-    sort(result.begin(), result.end());
-    return result;
-  }
-
-
   // description: 将一个用例格式写N次到指定文件中，通常是只写一次。
   template<class F> void testcases(const string& filename, int N, F f) {
     cout << "gen::testcases" << endl;
@@ -163,9 +137,49 @@ namespace gen {
       file << "\n\n";
     }
   }
+
+  // description：将值域在 [0-25] 或 [0-9] 范围内的整数数组转换为对应字符的字符串表示。
+  template<char offset>
+  std::string stringify(const std::vector<int>& numbers) {
+    std::string result(numbers.size(), '?');
+    std::transform(numbers.begin(), numbers.end(), result.begin(),
+                   [&](int num) { return (char)(offset + num); });
+    return result;
+  }
+
+  /**
+   * 描述：
+   * 将表示树结构的父节点数组转换为边列表，以符合题目要求的输入格式。
+   * - 如果 treeArr 的节点下标从零开始，则返回零开始的边列表。
+   * - 如果 treeArr 的节点下标从一开始，则返回一开始的边列表。
+   */
+  std::vector<std::pair<int, int>> edges(const std::vector<int>& treeArr) {
+    std::vector<std::pair<int, int>> edges;
+    for (int v = 1; v < (int)treeArr.size(); v++) {
+      edges.emplace_back(treeArr[v], v+(treeArr[1] == 1));
+    }
+    return edges;
+  }
+
+  /**
+   * 描述：
+   * 将整数 n 逐步分成若干份，每份大小受限于当前剩余值的 allocationLimit 倍（向上取整）。
+   * allocationLimit 范围为 (0.0, 1.0]，默认值为 0.8，值越低每份越小且均匀。
+   */
+  template<class T> vector<int> split(T n, double allocationLimit) {
+    int remaining = static_cast<int>(n);
+    vector<int> result;
+    while (remaining > 0) {
+      int piece = (int)gen::Int(1, max<int>(ceil(remaining * allocationLimit), 1))();
+      result.push_back(piece);
+      remaining -= piece;
+    }
+    sort(result.begin(), result.end());
+    return result;
+  }
 }
 
-// description: 重载顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果你希望更方便地输出 vector，可以像以下方式重载 ostream 的 << 运算符。
+// 描述: 来顺序输出 vector 的元素，每个元素之间用空格分隔，末尾也会有一个空格。如果你希望更方便地将 vector 写入文件中，可以以以下方式重载 ostream 的 << 运算符。
 //template<class T> ostream& operator<<(ostream& os, const vector<T>& a) {
 //  for (const T& x : a) {
 //    os << x << ' ';
