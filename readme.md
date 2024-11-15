@@ -1,49 +1,44 @@
-## 本仓库头文件概述：名称、功能与用法
+## 本仓库一些头文件的`名称`、`功能`以及`用法`说明
 
 ### 一、"gen.h"
-#### 1. 名称：`gen.h` 即generator.h。
-#### 2. 功能：该头文件用于生成随机测试用例，助力于自动化测试。
-#### 3. 用法：通过以下代码，您可以生成 N 组随机测试用例，并将其保存到指定的文本文件中。每组测试用例的格式由gen::testcases()的第三个参数定义。
+#### 1. `名称`：generator
+#### 2. `功能`：该头文件帮助生成随机测试用例。
+#### 3. `用法`：通过使用其中的gen::testcases()方法，可以生成 N 组随机测试用例，并将其保存到指定的文本文件中。每组测试用例的格式需在gen::testcases()的第三个参数进行设计。以下是静态使用例：
 
 ```cpp
 #include "dbg/gen.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/gen.h
 struct GEN {  
   GEN() {  
     gen::testcases("../input.txt", 1, [&] (ofstream& file) {  
-      // write a single test case generation function here...
+      // one single testcase generating...
     });  
   }  
 } GEN;  
-#endif
 ```
 
 ---
 
 ### 二、"che.h"
-#### 1. 名称：che.h 即checker.h。
-#### 2. 功能：该头文件用于验证当前解法与暴力解法输出的一致性，确保程序的正确性。
-#### 3. 用法：您可以将以下代码段放入 main.cpp 的末尾，以执行一致性检查。
+#### 1. 名称：checker
+#### 2. 功能：该头文件用于验证当前解法与暴力解法输出的一致性。
+#### 3. 用法：通过使用其中che::program结构体和che::isContentConsistent方法，可以对两个解题代码使用相同的输入、运行、各自输出，并检查输出的一致性。che::program结构体需要运行的代码由构造时的第三个参数指定。che::program结构体的前两个参数则用于指定代码运行输入输出将使用的文件。以下是静态使用例：
+
 ```cpp
 #include "dbg/che.h" // 更多信息请访问：https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/che.h
 struct CHE {
     CHE() {
         che::program("../input.txt", "../outputA.txt", solve).run();
         che::program("../input.txt", "../outputB.txt", [&] () {
-            // 在此处实现暴力解法...
+            // implemented brute force solution...
         }).run();
         assert(che::isContentConsistent("../outputA.txt", "../outputB.txt"));
     }
 } CHE;
 ```
-使用时需要在其中一个 che::program() 的第三个参数指定你的当前解法solve，另一个che::program则需要指定一个实现的暴力解法。
 
 ---
 ### 三、Examples:
-以下是一些使用示例和当时记录的日志，旨在追求：
-
-更高 🏌️‍♂️
-更快 🏊‍♀️
-更强 🧗‍♂️
+以下是一些使用历史，和当时记录的日志。
 ###  Problem #1: [E - Sum of All Substrings](https://atcoder.jp/contests/abc379/submissions/59613160) (Atcoder_abc379)
 ```cpp
 #ifdef LOCAL_DBG
@@ -59,14 +54,14 @@ struct DBG {
       int sum = 0;
       for (int x : a) sum += x;
       if (sum != 10) continue;
-      gen::testcases("../input.txt", 1, [&] (ofstream& file) {
+      gen::testcases("../input.txt", 1, [&] (ofstream& file) { // formatted content of each testcase
         file << 10 << ' ' << 5 << '\n';
         file << gen::Ints(1, 10)(5, 2) << '\n';
         file << a << '\n';
       });
       
-      che::program("../input.txt", "../outputA.txt", solve).run();
-      che::program("../input.txt", "../outputB.txt", [&] () {
+      che::program("../input.txt", "../outputA.txt", solve).run(); // my current solution
+      che::program("../input.txt", "../outputB.txt", [&] () { // another solution using brute force
         int n, m;
         cin >> n >> m;
         vector<int> pos(m), cnt(m);
@@ -111,8 +106,7 @@ struct DBG {
 } DBG;
 #endif
 ```
-24B09：这种基于 while(true) 的调试方案是我在这场比赛中首次尝试的。此后，对于可以写出暴力程序验证的问题，我会频繁采用这个方案。
-
+24B09：这种基于 while(true) 的调试方案是我在这场比赛中首次尝试的，用于处理 WA。对于那些可以轻松编写暴力程序进行验证的问题，这种方法让我能够将检查时间转化为完成代码的时间。同时，这种方法的一个优点是，由于代码通过了小例子的随机测试，第二次提交时出现 WA 的概率较低。
 ### Problem #2: (cf.) [E. XOR and Favorite Number](https://codeforces.com/problemset/problem/617/E) (Codeforces_round_340_div2)
 ```cpp
 #ifdef LOCAL_DBG1
