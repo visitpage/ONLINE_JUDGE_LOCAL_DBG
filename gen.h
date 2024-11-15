@@ -112,7 +112,7 @@ namespace gen {
   }
 }
 
-// description: 当需要更方便地输出 vector 时，可以考虑启用以下的 << 运算符重载。
+// description: 想要更方便地输出 vector 时，考虑启用以下ostream的<<运算符重载。
 //template<class T> ostream& operator<<(ostream& os, const vector<T>& a) {
 //  for (const T& x : a) {
 //    os << x << ' ';
