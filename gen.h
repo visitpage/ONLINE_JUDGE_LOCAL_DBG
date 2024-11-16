@@ -24,7 +24,7 @@ namespace gen {
   mt19937_64 gen(chrono::steady_clock::now().time_since_epoch().count());
 
   // 随机整数
-  template<class intX_t> struct Int {
+  template<class intX_t = int32_t> struct Int {
     uniform_int_distribution<intX_t> ud;
     intX_t operator()() { return ud(gen); }
     intX_t operator()(intX_t& var) { return var = ud(gen); }
@@ -34,7 +34,7 @@ namespace gen {
   };
 
   // 随机数组
-  template<class intX_t> struct Ints {
+  template<class intX_t = int32_t> struct Ints {
     uniform_int_distribution<intX_t> ud;
     vector<intX_t> operator()(int size, int pattern = 0) {
       vector<intX_t> result(size);
@@ -105,7 +105,7 @@ namespace gen {
       }
       return result;
     }
-    explicit Ints(intX_t lo, intX_t hi): ud(lo, hi) {
+    explicit Ints(intX_t lo = -1, intX_t hi = -1): ud(lo, hi) {
       gen_assert(lo <= hi, "Using (lo, hi) = (" + to_string(lo) + ", " + to_string(hi) + "), where lo is greater than hi for constructing uniform_int_distribution.");
     }
   };
