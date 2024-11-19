@@ -263,13 +263,14 @@ struct DSU {
 ### Problem #4...（将按照日历排序）：
 ### 2024-11
 
-|	Sun	|	Mon	| 	Tue	 |	Wed	|	Thu	|	Fri	|	Sat	|
-| :---: | :---: |:-----:| :---: | :---: | :---: | :---: |
-|		|		|  		   |		|		|	1	|	2	|
-|	3	|	4	|  	5	  |	6	|	7	|	8	|	9	|
-|	10	|	11	| 	[12] |	13	|	14	|	15	|	16	|
-|	17	|	18	| 	[19] |	20	|	21	|	22	|	23	|
-|	24	|	25	| 	26	  |	27	|	28	|	29	|	30	|
+|	Sun	|	Mon	|  	Tue	   |	Wed	|    	Thu	     |	Fri	|	Sat	|
+| :---: | :---: |:--------:| :---: |:------------:| :---: | :---: |
+|		|		|    		    |		|      		      |	1	|	2	|
+|	3	|	4	|   	5	    |	6	|     	7	      |	8	|	9	|
+|	10	|	11	|   	12    |	13	| 	14[^24B14]	 |	15	|	16	|
+|	17	|	18	| 	19[^19] |	20	|     	21	     |	22	|	23	|
+|	24	|	25	|   	26	   |	27	|     	28	     |	29	|	30	|
 
-[12]: ./solved-problems/CF280C_Game_on_Tree.txt
-[19]: ./solved-problems/CF280C_Game_on_Tree.txt "state:unsolved"
+[^24B14]: this is a foot note ./solved-problems/CF280C_Game_on_Tree.txt
+
+[^19]: wow ./solved-problems/CF280C_Game_on_Tree.txt
