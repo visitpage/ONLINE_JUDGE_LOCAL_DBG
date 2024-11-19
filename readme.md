@@ -268,7 +268,7 @@ struct DSU {
 |		|		|                        		                         |		|		|	1	|	2	|
 |	3	|	4	|                        	5	                        |	6	|	7	|	8	|	9	|
 |	10	|	11	|           	[12](https://example.com/1)	           |	13	|	14	|	15	|	16	|
-|	17	|	18	| 	[19](./solved-problems/CF280C Game on Tree.txt)	 |	20	|	21	|	22	|	23	|
+|	17	|	18	| 	[19](./solved-problems/CF280C_Game_on_Tree.txt)	 |	20	|	21	|	22	|	23	|
 |	24	|	25	|                       	26	                        |	27	|	28	|	29	|	30	|
 
 | 日期   | 事件         |
