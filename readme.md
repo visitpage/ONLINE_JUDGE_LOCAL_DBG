@@ -260,7 +260,7 @@ struct DSU {
 };
 ```
 
-### # Problem #4...（将按照日历排序）：
+### Problem #4...（将按照日历排序）：
 ### 2024-11
 
 |	Sun	|	Mon	|                       	Tue	                       |	Wed	|	Thu	|	Fri	|	Sat	|
@@ -270,3 +270,9 @@ struct DSU {
 |	10	|	11	|                       	12	                        |	13	|	14	|	15	|	16	|
 |	17	|	18	| 	[19](./solved-problems/CF280C Game on Tree.txt)	 |	20	|	21	|	22	|	23	|
 |	24	|	25	|                       	26	                        |	27	|	28	|	29	|	30	|
+
+| 日期   | 事件         |
+|--------|--------------|
+| [1](https://example.com/1)  | 事件一      |
+| [2](https://example.com/2)  | 事件二      |
+| [3](https://example.com/3)  | 事件三      |
