@@ -271,6 +271,6 @@ struct DSU {
 |	17	|	18	| 	19[^19] |	20	|     	21	     |	22	|	23	|
 |	24	|	25	|   	26	   |	27	|     	28	     |	29	|	30	|
 
-[^24B14]: [this is a foot note](./solved-problems/CF280C_Game_on_Tree.txt)
+[^24B14]: [this is a foot note](main/solved-problems/CF280C_Game_on_Tree.txt)
 
 [^19]: wow ./solved-problems/CF280C_Game_on_Tree.txt
