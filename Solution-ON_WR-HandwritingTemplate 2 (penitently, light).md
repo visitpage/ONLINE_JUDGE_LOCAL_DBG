@@ -1,11 +1,9 @@
-# cp技巧汇总
-1. 该文件仅供书写，不可读取，我希望在不允许复制粘贴的编码环境中，能够快速输入模板。
-<<<<<<< HEAD:Solution-ON_WR-HandwritingTemplate 2 (penitently, light).md
-2. 该文件修剪模板，将我原有的（那一些允许复制粘贴使用）的模板必要的代码剪出。
-=======
-2. 该文件整理了模板范式，我将原有的（那一些允许复制粘贴使用）的模板进行了修剪，只保留了必要的代码。
->>>>>>> 48a1ed285b740b415f49a4f82416a83f13a0e4ee:Solution-ON_WR-HandwritingTemplate 2 (penitently, colored).md
-3. 接下来，我将充分的练习这些代码默写，以实现快速且准确地记忆。
+# "手写模板吧，手写模板吧，崇拜手写吧”
+我希望在不允许复制粘贴的编码环境中快速输入模板，因此新建了这一个版本的Solution-codeSnippet。
+
+1. 该文件整理了模板范式，我将原有的（那一些允许复制粘贴使用）的模板进行了修剪，只保留了必要的代码。
+2. 该文件只写不读.
+
 # MOD （模运算）
 ### expMOD （快速幂）
 ```cpp
@@ -77,7 +75,6 @@ template<class T> struct FenwickTree {
   }  
 };
 ```
-<<<<<<< HEAD:Solution-ON_WR-HandwritingTemplate 2 (penitently, light).md
 
 ### LazySegtree（模板化参考AC-library）
 ```cpp
@@ -114,5 +111,3 @@ template<class T, T(*op)(T, T), T(*e)(),
   T query(int l, int r, P x = id()) { modifyQuery(1, 0, n-1, l, r, x); }
 };
 ```
-=======
->>>>>>> 48a1ed285b740b415f49a4f82416a83f13a0e4ee:Solution-ON_WR-HandwritingTemplate 2 (penitently, colored).md
