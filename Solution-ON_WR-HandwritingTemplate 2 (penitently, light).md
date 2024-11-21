@@ -1,5 +1,6 @@
+# cp技巧汇总
 1. 该文件仅供书写，不可读取，我希望在不允许复制粘贴的编码环境中，能够快速输入模板。
-2. 该文件整理了模板范式，我将原有的（那一些允许复制粘贴使用）的模板进行了精简，只保留了必要的代码。
+2. 该文件修剪模板，将我原有的（那一些允许复制粘贴使用）的模板必要的代码剪出。
 3. 接下来，我将充分的练习这些代码默写，以实现快速且准确地记忆。
 # MOD （模运算）
 ### expMOD （快速幂）
@@ -70,5 +71,41 @@ template<class T> struct FenwickTree {
   T query(int l, int r) {  
     return query(r)-query(l-1);  
   }  
+};
+```
+
+### LazySegtree（模板化参考AC-library）
+```cpp
+template<class T, T(*op)(T, T), T(*e)(),
+        class P, T(*mapping)(T, P), P(*composition)(P, P), P(*id)()> struct LazySegtree {
+  int n;
+  vector<T> t;
+  vector<P> lazy;
+  LazySegtree(vector<T> a): n(a.size()), t(4*n), lazy(4*n, P()) { }
+  void apply(int v, P x) {
+    t[v] = mapping(t[v], x);
+    lazy[v] = composition(lazy[v], x);
+  }
+  void push(int v) {
+    if (lazy[v] == id()) return;
+    apply(2*v, lazy[v]);
+    apply(2*v+1, lazy[v]);
+    lazy[v] = id();
+  }
+  T modifyQuery(int v, int tl, int tr, int l, int r, P x) {
+    if (r < tl || tr < l) {
+      return e();
+    } else if (l == tl && tr == r) {
+      return apply(v, x), t[v];
+    } else {
+      push(v);
+      int tm = (tl+tr)/2;
+      T lResult = modifyQuery(2*v, tl, tm, max(l, tl), min(r, tm), x);
+      T rResult = modifyQuery(2*v+1, tm+1, tr, max(l, tm+1), min(r, tr), x);
+      return t[v] = op(t[2*v], t[2*v+1]), op(lResult, rResult);
+    }
+  }
+  T modify(int l, int r, P x = id()) { modifyQuery(1, 0, n-1, l, r, x); }
+  T query(int l, int r, P x = id()) { modifyQuery(1, 0, n-1, l, r, x); }
 };
 ```
