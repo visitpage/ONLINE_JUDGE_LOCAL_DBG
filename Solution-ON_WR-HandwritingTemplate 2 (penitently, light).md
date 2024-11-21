@@ -77,16 +77,21 @@ template<class T> struct FenwickTree {
 ```
 
 ### LazySegtree（模板化参考AC-library）
+// kotatsugame：https://atcoder.jp/contests/abc324/submissions/46551526
+
 ```cpp
 template<class T, T(*op)(T, T), T(*e)(),
         class P, T(*mapping)(T, P), P(*composition)(P, P), P(*id)()> struct LazySegtree {
   int n;
   vector<T> t;
   vector<P> lazy;
-  LazySegtree(vector<T> a): n(a.size()), t(4*n), lazy(4*n, P()) { }
+  LazySegtree(vector<T> a): n(1<<(__lg((int)a.size()-1)+1)), t(2*n, e()), lazy(n, id()) {
+    copy(a.begin(), a.end(), t.begin()+n);
+    for (int v = n-1; v >= 1; v--) t[v] = op(t[2*v], t[2*v+1]);
+  }
   void apply(int v, P x) {
     t[v] = mapping(t[v], x);
-    lazy[v] = composition(lazy[v], x);
+    if (v < n) lazy[v] = composition(lazy[v], x);
   }
   void push(int v) {
     if (lazy[v] == id()) return;
@@ -94,20 +99,19 @@ template<class T, T(*op)(T, T), T(*e)(),
     apply(2*v+1, lazy[v]);
     lazy[v] = id();
   }
-  T modifyQuery(int v, int tl, int tr, int l, int r, P x) {
+  T modifyQuery(int l, int r, P x = id(), int v = 1, int tl = 0, int tr = -1) {
+    if (tr < 0) tr = n-1;
     if (r < tl || tr < l) {
       return e();
-    } else if (l == tl && tr == r) {
+    } else if (l <= tl && tr <= r) {
       return apply(v, x), t[v];
     } else {
       push(v);
       int tm = (tl+tr)/2;
-      T lResult = modifyQuery(2*v, tl, tm, max(l, tl), min(r, tm), x);
-      T rResult = modifyQuery(2*v+1, tm+1, tr, max(l, tm+1), min(r, tr), x);
+      T lResult = modifyQuery(l, r, x, 2*v, tl, tm);
+      T rResult = modifyQuery(l, r, x, 2*v+1, tm+1, tr);
       return t[v] = op(t[2*v], t[2*v+1]), op(lResult, rResult);
     }
   }
-  T modify(int l, int r, P x = id()) { modifyQuery(1, 0, n-1, l, r, x); }
-  T query(int l, int r, P x = id()) { modifyQuery(1, 0, n-1, l, r, x); }
 };
 ```
