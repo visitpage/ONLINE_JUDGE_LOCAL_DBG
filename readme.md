@@ -285,10 +285,9 @@ struct DSU {
 |    |    |           |    |            |     1      |  2  |
 |  3  |  4  |     5     |  6  |     7      |     8      |  9  |
 | 10 | 11 |    12     | 13 |     14     |     15     | 16 |
-| 17 | 18 |    19     | 20 | 21[^24B21] | 22[^24B22] | 23 |
+| 17 | 18 |    19     | 20 | 21 | 22[^24B22] | 23 |
 | 24 | 25 |    26     | 27 |     28     |     29     | 30 |
 
 
-[^24B21]:[](/solved-problems/niuke_xiaobaiyuesai_105_f.md)
-[^24B22]:[精简代码的LazySegtree首战结果如何？传闻这将是它的毕业之战！](./solved-problems/niuke_xiaobaiyuesai_105_f.md)
+[^24B22]:[精简代码的LazySegtree首战结果如何？传闻这将是它的毕业之战！](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_xiaobaiyuesai_105_f.md)
 
