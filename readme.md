@@ -289,6 +289,6 @@ struct DSU {
 | 24 | 25 |    26     | 27 |     28     |     29     | 30 |
 
 
-[^24B21]:[](./solved-problems/niuke_xiaobaiyuesai_105_f.md)
+[^24B21]:[](/solved-problems/niuke_xiaobaiyuesai_105_f.md)
 [^24B22]:[精简代码的LazySegtree首战结果如何？传闻这将是它的毕业之战！](./solved-problems/niuke_xiaobaiyuesai_105_f.md)
 
