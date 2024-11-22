@@ -85,7 +85,7 @@ template<class T, T(*op)(T, T), T(*e)(),
   int n;
   vector<T> t;
   vector<P> lazy;
-  LazySegtree(vector<T> a): n(1<<(__lg((int)a.size()-1)+1)), t(2*n, e()), lazy(n, id()) {
+  LazySegtree(vector<T> a): n(1<<(__lg(a.size())+1)), t(2*n, e()), lazy(n, id()) {
     copy(a.begin(), a.end(), t.begin()+n);
     for (int v = n-1; v >= 1; v--) t[v] = op(t[2*v], t[2*v+1]);
   }
