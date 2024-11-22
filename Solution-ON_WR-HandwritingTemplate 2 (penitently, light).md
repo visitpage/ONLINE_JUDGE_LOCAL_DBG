@@ -77,19 +77,18 @@ template<class T> struct FenwickTree {
 ```
 
 ### LazySegtree（模板化参考AC-library）
-// kotatsugame：https://atcoder.jp/contests/abc324/submissions/46551526
-
 ```cpp
-template<class T, T(*op)(T, T), T(*e)(),
-        class P, T(*mapping)(T, P), P(*composition)(P, P), P(*id)()> struct LazySegtree {
+template<class T, T(*op)(T, T), T(*e)(), class P, T(*mapping)(T, P), P(*composition)(P, P), P(*id)()>
+struct LazySegtree {
   int n;
   vector<T> t;
   vector<P> lazy;
   LazySegtree(vector<T> a): n(1<<(__lg(a.size())+1)), t(2*n, e()), lazy(n, id()) {
     copy(a.begin(), a.end(), t.begin()+n);
-    for (int v = n-1; v >= 1; v--) t[v] = op(t[2*v], t[2*v+1]);
+    for (int i = n-1; i >= 1; i--) t[i] = op(t[2*i], t[2*i+1]);
   }
   void apply(int v, P x) {
+    if (x == id()) return;
     t[v] = mapping(t[v], x);
     if (v < n) lazy[v] = composition(lazy[v], x);
   }

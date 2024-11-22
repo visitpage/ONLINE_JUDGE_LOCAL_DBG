@@ -5,6 +5,7 @@
 //void solve() {
 //}
 //
+//
 //int32_t main() {
 //  ios::sync_with_stdio(false); cin.tie(nullptr);
 //#ifdef TEST_SOLUTION_N_TIMES
@@ -13,11 +14,11 @@
 //  cin >> N;
 //  for (int i = 0; i < N; i++)
 //#endif
-//    solve();
+//          solve();
 //  return 0;
 //}
 //
-//#ifdef LOCAL_DBG
+//#ifdef LOCAL_DBG1
 //#include "dbg/che.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/che.h
 //#include "dbg/gen.h" // https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/gen.h
 //struct DBG {
@@ -29,10 +30,10 @@
 //      che::program("../input.txt", "../outputA.txt", solve).run();
 //      che::program("../input.txt", "../outputB.txt", [&] () {
 //        // brute force...
-//      }
 //      }).run();
 //      assert(che::isContentConsistent("../outputA.txt", "../outputB.txt"));
 //    }
 //  }
-//} DBG;
+//};
+//[[maybe_unused]] DBG run_debug;
 //#endif
