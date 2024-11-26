@@ -75,7 +75,6 @@ template<class T> struct FenwickTree {
   }  
 };
 ```
-
 ### LazySegtree（模板化参考AC-library）
 ```cpp
 template<class T, T(*op)(T, T), T(*e)(), class P, T(*mapping)(T, P), P(*composition)(P, P), P(*id)()>
@@ -106,6 +105,31 @@ struct LazySegtree {
       return apply(v, x), t[v];
     } else {
       push(v);
+      int tm = (tl+tr)/2;
+      T lResult = modifyQuery(l, r, x, 2*v, tl, tm);
+      T rResult = modifyQuery(l, r, x, 2*v+1, tm+1, tr);
+      return t[v] = op(t[2*v], t[2*v+1]), op(lResult, rResult);
+    }
+  }
+};
+```
+
+### SegmentTree（模板化参考AC-library）
+```cpp
+template<class T, T(*op)(const T&, const T&), T(*e)(), class P, T(*mapping)(const T&, P), P(*id)()>
+struct SegmentTree {
+  int n;
+  vector<T> t;
+  SegmentTree(const vector<T>& a): n(1<<(__lg(a.size())+1)), t(2*n, e()) {
+    copy(a.begin(), a.end(), t.begin()+n);
+    for (int i = n-1; i >= 1; i--) t[i] = op(t[2*i], t[2*i+1]);
+  }
+  T modifyQuery(int l, int r, P x = id(), int v = 1, int tl = 0, int tr = -1) { // 修改时只支持单点改
+    if (tr == -1) tr = n-1;
+    if (r < tl || tr < l) return e();
+    else if (l <= tl && tr <= r) {
+      return t[v] = mapping(t[v], x);
+    } else {
       int tm = (tl+tr)/2;
       T lResult = modifyQuery(l, r, x, 2*v, tl, tm);
       T rResult = modifyQuery(l, r, x, 2*v+1, tm+1, tr);
