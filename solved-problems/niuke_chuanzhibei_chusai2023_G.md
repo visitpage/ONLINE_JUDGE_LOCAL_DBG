@@ -92,5 +92,6 @@ int main() {
     cout << colors << '\n';
 }
 ```
+第一个dfs可以改成bfs吗，刚才觉得可以，现在觉得，应该，不能吧。
 
 </details>
