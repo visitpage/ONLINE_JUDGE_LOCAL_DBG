@@ -75,7 +75,7 @@ template<class T> struct FenwickTree {
   }  
 };
 ```
-### LazySegtree（模板化参考AC-library）
+### LazySegtree（懒传播操作线段树）（模板化参考AC-library）
 ```cpp
 template<class T, T(*op)(T, T), T(*e)(), class P, T(*mapping)(T, P), P(*composition)(P, P), P(*id)()>
 struct LazySegtree {
@@ -114,7 +114,7 @@ struct LazySegtree {
 };
 ```
 
-### SegmentTree（模板化参考AC-library）
+### SegmentTree（线段树）（模板化参考AC-library）
 ```cpp
 template<class T, T(*op)(const T&, const T&), T(*e)(), class P, T(*mapping)(const T&, P), P(*id)()>
 struct SegmentTree {
