@@ -16,7 +16,7 @@
 这个BUG和STL相关，于是想设计STL娘的形象，这是我第一次想象这个角色的样子。以下是角色的设定：
 
 <details>
-<summary>STL娘个设(^ <) </summary>
+<summary>STL娘(^ <) 涂鸦日记</summary>
 
 ![相片](../medias/STL_MONSTER_Bug-Snapshot.png)
 </details>
