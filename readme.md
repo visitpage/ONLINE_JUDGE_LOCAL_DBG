@@ -280,14 +280,15 @@ struct DSU {
 
 ### 2024-11
 
-| Sun | Mon |    Tue    | Wed |    Thu     |    Fri     | Sat |
-| :-: | :-: |:---------:| :-: |:----------:|:----------:| :-: |
-|    |    |           |    |            |     1      |  2  |
-|  3  |  4  |     5     |  6  |     7      |     8      |  9  |
-| 10 | 11 |    12     | 13 |     14     |     15     | 16 |
-| 17 | 18 |    19     | 20 | 21 | 22[^24B22] | 23 |
-| 24 | 25 |    26     | 27 |     28     |     29     | 30 |
+| Sun | Mon |    Tue     | Wed |    Thu     |    Fri     | Sat |
+| :-: | :-: |:----------:| :-: |:----------:|:----------:| :-: |
+|    |    |            |    |            |     1      |  2  |
+|  3  |  4  |     5      |  6  |     7      |     8      |  9  |
+| 10 | 11 |     12     | 13 |     14     |     15     | 16 |
+| 17 | 18 |     19     | 20 | 21 | 22[^24B22] | 23 |
+| 24 | 25 | 26[^24B26] | 27 |     28     |     29     | 30 |
 
 
 [^24B22]:[精简代码的LazySegtree首战结果如何？传闻这将是它的毕业之战！](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_xiaobaiyuesai_105_f.md)
+[^24B26]:[祝《愁虫战记》（又名算法竞赛传说级BUG传记）开篇，第一愁：“试图对STL容器刻舟求剑”究竟是怎么一回事？](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_chuanzhibei_chusai2023_G.md)
 
