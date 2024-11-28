@@ -290,5 +290,5 @@ struct DSU {
 
 
 [^24B22]:[精简代码的LazySegtree首战结果如何？传闻这将是它的毕业之战！](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_xiaobaiyuesai_105_f.md)
-[^24B26]:[祝《愁虫战记》（又名算法竞赛传说级BUG传记）开篇，第一愁：“试图对STL容器刻舟求剑”究竟是怎么一回事？](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_chuanzhibei_chusai2023_G.md)
+[^24B26]:[祝《虫虫战记》（又名算法竞赛传说级BUG传记）开篇，第一战：“试图对STL容器刻舟求剑”究竟是怎么一回事？](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_chuanzhibei_chusai2023_G.md)
 
