@@ -289,7 +289,7 @@ struct DSU {
 | 24 | 25 | 26[^24B26] | 27 |     28     |     29     | 30 |
 
 [^24B22]:[精简代码的LazySegtree首战结果如何？传闻这将是它的毕业之战！](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_xiaobaiyuesai_105_f.md)
-[^24B26]:[你在使用C++时还在对STL容器“刻舟求剑”吗？那些年惊讶过我的代码刺客盘点。](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_chuanzhibei_chusai2023_G.md)
+[^24B26]:[你还在对STL的容器“刻舟求剑”吗？那些年惊讶过我的代码刺客盘点。](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/niuke_chuanzhibei_chusai2023_G.md)
 
 ### 2024-12
 |	Sun	|	Mon	|    	Tue	    |	Wed	|	Thu	|	Fri	|	Sat	|
