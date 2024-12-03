@@ -5,18 +5,18 @@
 2. 该文件只写不读.
 
 # MOD （模运算）
-### expMOD （快速幂）
+### powMOD （快速幂模）
 ```cpp
-int expMOD(int64_t a, int64_t b, int MOD) {  
-  a %= MOD;  
-  int64_t c = 1;  
-  while (b) {  
-    if (b&1) c = c*a%MOD;  
-    a = a*a%MOD;  
-    b >>= 1;  
-  }  
-  return (int)c;  
-} 
+int64_t powMOD(int64_t a, int64_t b) {
+  a %= MOD;
+  int64_t c = 1;
+  while (b > 0) {
+    if ((b&1) == 1) c = c*a%MOD;
+    a = a*a%MOD;
+    b >>= 1;
+  }
+  return c;
+}
 ```
 ### ModInt （模运算整数类）
 ```cpp
@@ -30,20 +30,23 @@ template<unsigned M> struct ModInt {
 };
 using mint = ModInt<MOD>;  
 ```
-### Binomial（二项式系数）
+### BinomialMOD（二项式系数模）
 ```cpp
-template<class T> struct Binomial {  
-  vector<T> factorial;  
-  vector<T> inverseFactorial;  
-  Binomial(int n): factorial(n+1), inverseFactorial(n+1) {  
-    factorial[0] = 1;  
-    for (int i = 1; i <= n; i++) factorial[i] = factorial[i-1]*i;  
-    inverseFactorial[n] = expMOD(factorial[n].x, MOD-2, MOD);  
-    for (int i = n; i >= 1; i--) inverseFactorial[i-1] = inverseFactorial[i]*i;  
-  }  
-  mint binom(int n, int m) {  
-    return factorial[n]*inverseFactorial[m]*inverseFactorial[n-m];  
-  }  
+struct BinomialMOD {
+  int n;
+  vector<int64_t> factorial, inverseFactorial;
+  BinomialMOD(int n): n(n), factorial(n+1), inverseFactorial(n+1) {
+    factorial[0] = 1;
+    for (int i = 1; i <= n; i++) factorial[i] = factorial[i-1]*i%MOD;
+    inverseFactorial[n] = powMOD(factorial[n], MOD-2);
+    for (int i = n; i >= 1; i--) inverseFactorial[i-1] = inverseFactorial[i]*i%MOD;
+  }
+  int64_t binom(int a, int k) { // 24C04：复杂的边界工作交给解决方案去解决
+    assert (0 <= a && a <= n);
+    assert (0 <= k && k <= n);
+    assert (0 <= a-k && a-k <= n);
+    return factorial[a]*inverseFactorial[k]%MOD*inverseFactorial[a-k]%MOD;
+  }
 };
 ```
 
