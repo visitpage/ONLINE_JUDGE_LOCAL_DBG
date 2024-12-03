@@ -18,8 +18,8 @@
                   3. 目前已知本BUG只在两个常用代码（堆优化dijkstra；vector形bfs）处出现，在这两种代码处多考虑引用变量是否可取也许也足够了。
 
 # BUG已发现的出现位置
-    例1：vector形式bfs、出队时
-        描述（代码块）：
+    位置1：vector形式bfs、出队时
+        错误示例（代码块）：
         ```cpp
             // 下述代码展示对一颗无向树进行vector形式的bfs
             // 假设已定义邻接表 vector<vector<int>> G(n); 
@@ -27,21 +27,21 @@
         
             vector<pair<int, int>> q {{0, -1}}; // bfs 队列
             for (int i = 0; i < (int)q.size(); i++) {
-                auto &[v, p] = a[i]; // 引用变量（此处为从bfs队列中取队首）
+                auto &[v, p] = a[i]; // 创建引用变量
                 for (int u : G[v]) {
                     if (u == p) continue;
-    
-                    a.push_back({u, v}); // 操作STL容器（此处为将结点加入bfs队列）
+                    colors[u] = (pairId[v] == pairId[u] ? colors[v] : (colors[v] == 'R' ? 'B' : 'R')); // 某题的维护
+                    a.push_back({u, v}); // STL容器进行可能会使其扩容的操作
                 }
-                // 此处for (int u : G[v]) 这个循环很可能操作不止一轮，如果循环时由于push_back，使得bfs队列发生了扩容，循环外创建的关联到bfs队列的引用变量 &[v, p] 由于bfs队列已经扩容而它们没有进行维护是危险指针，操作它们行未定义行为。
+                // 代码展示树的bfs，所以此处for (int u : G[v]) 这个循环很可能操作不止一轮，如果循环时由于push_back使bfs队列发生了扩容，循环外创建的对当前队首的引用变量 &[v, p] 就会是危险指针，下一轮循环继续操作危险指针就会产生未定义行为。
             }
         ```
 
         正确做法：取队首时不取引用
 
-    例2：堆优化dijkstra、取堆顶时
-        描述：这是刻舟求剑BUG的另一个经典的出现位置（两年前就遇到过了），取堆顶时取引用的话，这些**引用STL的变量**无法跟随**STL的操作**而**自动更新**，随着堆内变换，它们会转化成危险的指针。
-        
+    位置2：堆优化dijkstra、取堆顶时
+        描述：这是刻舟求剑BUG的另一个经典的出现位置，尝试着写一个堆优化dijkstra并且用引用来对优先队列进行出队，然后写剩余的dijkstra的代码时会发现，完美达成本BUG的触发条件，硬着头皮取引用将导致严重的后果。
+
         正确做法： 取堆顶时不取引用
 
     刻舟求剑这个BUG似乎和**队列**绑定出现了，我使用std::set却从未遇到过这个BUG，原因可能是由于不像那些在函数中创建的引用变量，set的迭代器会随着set的内存调整一同更新。这令我我有些好奇，比起简单的不取引用，更加正确的做法是否和迭代器有关。
@@ -51,7 +51,7 @@
 当对STL操作不当会引起这个BUG，关于STL的娘化形象还没有公众的定义，于是我自己想象了一遍，结合了C++和STL的一些特性进行了涂鸦。
 
 <details>
-<summary>个人势 STL娘(^ <) 的形象图</summary>
+<summary>我的个人势 STL娘(^ <) 的形象图</summary>
 
 ![相片](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/tree/main/medias/STL_MONSTER_Bug-Snapshot.png)
 
