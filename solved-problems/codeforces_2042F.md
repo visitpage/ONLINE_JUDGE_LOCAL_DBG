@@ -11,7 +11,7 @@
 <details>
 <summary>Edge娘的挣扎</summary>
 
-![img.png](../medias/Edge_GRIL_remainingValueDesired.png)
+![Edge_GRIL_remainingValueDesired.png](..%2Fmedias%2FEdge_GRIL_remainingValueDesired.png)
 
 </details>
 

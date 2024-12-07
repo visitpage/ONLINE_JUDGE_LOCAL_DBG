@@ -53,7 +53,7 @@
 <details>
 <summary>我的个人势 STL娘(^ <) 的形象图</summary>
 
-![相片](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/tree/main/medias/STL_MONSTER_Bug-Snapshot.png)
+![STL_MONSTER_Bug-Snapshot.png](..%2Fmedias%2FSTL_MONSTER_Bug-Snapshot.png)
 
 </details>
 
