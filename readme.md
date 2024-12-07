@@ -301,4 +301,4 @@ struct DSU {
 |	29	|	30	|    	31	     |		|		|		|     		      |
 
 [^24C03]:[能维护区间内两个子段相加最大和信息的线段树](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_2042F.md)
-[^24C07]:[你有过看到数据范围数组长度等于0的经历吗，那些年惊讶过我的代码刺客其之二。](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_gym100551A.md)
+[^24C07]:[“那个数组长度是零！”型运行时错误，那些年惊讶过我的代码刺客其之二。](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_gym100551A.md)
