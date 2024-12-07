@@ -300,5 +300,5 @@ struct DSU {
 |	22	|	23	|    	24	     |	25	|	26	|	27	|    	28	     |
 |	29	|	30	|    	31	     |		|		|		|     		      |
 
-[^24C03]:[线段树维护区间和->最大子段和->最大两个不重叠子段和加端点。这些都是你的涉猎范围吗？](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_2042F.md)
-[^24C07]:[“那个数组长度是零！”型式的运行时错误，那些年惊讶过我的代码刺客其之二。](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_gym100551A.md)
+[^24C03]:[线段树维护最大两个不重叠子段和（加端点）](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_2042F.md)
+[^24C07]:[“那个数组长度是零！”型运行时错误，那些年惊讶过我的代码刺客其之二。](https://github.com/visitpage/ONLINE_JUDGE_LOCAL_DBG/blob/main/solved-problems/codeforces_gym100551A.md)
