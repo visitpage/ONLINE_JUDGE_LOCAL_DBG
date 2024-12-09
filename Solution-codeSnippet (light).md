@@ -727,7 +727,7 @@ int detmod(std::vector<std::vector<long long>> mat, int MOD) {
 }
 ```
 ## subTopic: Kirchhoff's matrix tree theorem（矩阵树定理）
-![[Kirchhoff's matrix tree theorem.png]]
+![Kirchhoff's_matrix-tree-theorem.png](medias%2FKirchhoff%27s_matrix-tree-theorem.png)
 
 # Digit DP（处理数位型DP的常用方式）
 ```cpp
